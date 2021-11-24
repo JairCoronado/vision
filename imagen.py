@@ -1,0 +1,10 @@
+import cv2
+img = cv2.imread("botella.jpg")
+result = cv2.fastNlMeansDenoisingColored(img,None,20,10,7,21)
+gray_img = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)
+retval, thresh = cv2.threshold(gray_img, 100, 160, 100)
+img_contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+cv2.drawContours(img, img_contours, -1, (0, 255, 0))
+cv2.imshow('Image Contours', img)
+cv2.imshow('Image gris', gray_img)
+cv2.waitKey(0)
